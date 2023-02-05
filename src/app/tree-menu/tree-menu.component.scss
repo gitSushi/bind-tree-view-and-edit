@@ -1,0 +1,16 @@
+svg {
+  height: 97vh;
+
+  .flexy {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .griddy {
+    height: 100%;
+    display: grid;
+    place-content: center;
+  }
+}
