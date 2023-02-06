@@ -24,6 +24,8 @@ export class TreeService {
     },
   ];
 
+  activeTreeId: number = 0;
+
   private messageSource = new BehaviorSubject(this.trees[0]);
   currentMessage = this.messageSource.asObservable();
 
@@ -39,5 +41,9 @@ export class TreeService {
 
   showTree(): Tree[] {
     return this.trees;
+  }
+
+  showId(): number {
+    return this.activeTreeId;
   }
 }

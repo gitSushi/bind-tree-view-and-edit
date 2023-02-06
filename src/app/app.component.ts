@@ -18,13 +18,14 @@ export class AppComponent implements OnInit, OnDestroy {
   /**
    * @type {number} activeTreeId - Represents the history cookie : last visited node
    */
-  activeTreeId: number = 0;
+  activeTreeId: number;
 
   // message:string;
   subscription: Subscription | undefined;
 
   constructor(private service: TreeService) {
     this.trees = this.service.showTree();
+    this.activeTreeId = this.service.showId();
     this.activeTree = this.trees[this.activeTreeId];
     this.newContent = this.trees[this.activeTreeId].content;
   }
