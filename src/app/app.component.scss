@@ -1,0 +1,30 @@
+.flexy {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: auto;
+  // grid-template-areas:
+  //   "app-tree-menu app-read-tree";
+  // display: flex;
+  // justify-content: space-between;
+  // align-content: center;
+  // flex-flow: row wrap;
+}
+
+.flexy-item:nth-child(2) {
+  background-color: orange;
+}
+
+// .flexy > * {
+//   flex: 1 100%;
+// }
+
+// @media all and (min-width: 800px) {
+//   .flexy-item {
+//     flex: 1 1 0;
+//   }
+
+//   .flexy-item:nth-child(2) {
+//     flex: 2 0;
+//   }
+// }

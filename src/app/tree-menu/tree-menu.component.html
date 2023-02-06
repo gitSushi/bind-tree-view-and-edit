@@ -1,4 +1,8 @@
-<svg viewBox="0 0 155.7585 224.88408" xmlns="http://www.w3.org/2000/svg">
+<svg
+  viewBox="0 0 155.7585 224.88408"
+  xmlns="http://www.w3.org/2000/svg"
+  preserveAspectRatio="none"
+>
   <g transform="translate(-33.594872,-25.58941)">
     <path
       style="fill: #79c966"
@@ -12,6 +16,28 @@
   <foreignObject x="15" y="16" width="122" height="151">
     <div xmlns="http://www.w3.org/1999/xhtml" class="griddy">
       <div class="hello">Hello Tree !</div>
+      <!-- <p>Menu comes here</p> -->
+      <ul class="">
+        <!-- <li>
+          <a
+            routerLink="/root-node"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+            >A</a
+          >
+        </li> -->
+        <!-- <li><a>B</a></li>
+        <li><a>C</a></li> -->
+
+        <li
+          class="tree-li"
+          (click)="handleClick(tree.id)"
+          *ngFor="let tree of trees"
+          [class.active]="activeTreeId === tree.id"
+        >
+          {{ tree.value }}-{{ tree.id }}
+        </li>
+      </ul>
     </div>
   </foreignObject>
 </svg>

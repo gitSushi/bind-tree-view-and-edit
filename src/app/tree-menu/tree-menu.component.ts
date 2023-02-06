@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Tree } from '../tree';
 
 @Component({
   selector: 'app-tree-menu',
   templateUrl: './tree-menu.component.html',
-  styleUrls: ['./tree-menu.component.scss']
+  styleUrls: ['./tree-menu.component.scss'],
 })
 export class TreeMenuComponent implements OnInit {
+  @Input() trees: Tree[] = [];
 
-  constructor() { }
+  @Input() activeTreeId: number = -1;
 
-  ngOnInit(): void {
+  @Output() updateActiveTreeId = new EventEmitter<number>();
+
+  constructor() {}
+
+  ngOnInit(): void {}
+
+  handleClick(id: number) {
+    this.activeTreeId = id;
+    this.updateActiveTreeId.emit(id);
   }
-
 }

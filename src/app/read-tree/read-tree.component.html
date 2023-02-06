@@ -1,0 +1,10 @@
+<main>
+  <p>read-tree works!</p>
+
+  <h1>{{ activeTree.value }}</h1>
+
+  <input
+    (ngModelChange)="handleChange($event)"
+    [ngModel]="activeTree.content"
+  />
+</main>

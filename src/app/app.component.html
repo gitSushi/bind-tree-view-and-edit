@@ -1,1 +1,18 @@
-<app-tree-menu></app-tree-menu>
+<p style="text-align: center">
+  FROM APP :
+  <span>{{ newContent }}</span>
+</p>
+
+<div class="flexy">
+  <div class="flexy-item">
+    <app-tree-menu
+      [trees]="trees"
+      [activeTreeId]="activeTreeId"
+      (updateActiveTreeId)="handleUpdateActiveTreeId($event)"
+    ></app-tree-menu>
+  </div>
+  <div class="flexy-item">
+    <app-read-tree [activeTree]="activeTree"></app-read-tree>
+  </div>
+  <!-- <div class="flexy-item"><router-outlet></router-outlet></div> -->
+</div>

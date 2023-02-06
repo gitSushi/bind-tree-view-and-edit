@@ -1,16 +1,23 @@
 svg {
+  display: block;
+  min-width: 200px;
+  width: 100%;
   height: 97vh;
-
-  .flexy {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 
   .griddy {
     height: 100%;
     display: grid;
     place-content: center;
+  }
+
+  .tree-li {
+    font-weight: 900;
+    cursor: pointer;
+    margin-bottom: 5px;
+  }
+
+  .active {
+    background-color: #537e49;
+    color: white;
   }
 }
