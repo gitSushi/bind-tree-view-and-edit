@@ -1,10 +1,68 @@
 <main>
-  <p>read-tree works!</p>
+  <nav>
+    <p>Edit a leaf</p>
+    <div class="flexy-nav">
+      <input class="input-font-family" placeholder="Calibri Light" />
+      <input class="input-font-size" placeholder="12" />
+      <div class="flexy-nav-border"></div>
+      <button>
+        <mat-icon
+          svgIcon="format_bold"
+          aria-hidden="false"
+          aria-label="format bold SVG icon"
+        ></mat-icon>
+      </button>
+      <button>
+        <mat-icon
+          svgIcon="format_italic"
+          aria-hidden="false"
+          aria-label="format italic SVG icon"
+        ></mat-icon>
+      </button>
+      <button>
+        <mat-icon
+          svgIcon="format_underlined"
+          aria-hidden="false"
+          aria-label="format underlined SVG icon"
+        ></mat-icon>
+      </button>
+      <button>
+        <mat-icon
+          svgIcon="format_ink_highlighter"
+          aria-hidden="false"
+          aria-label="format ink highlighter SVG icon"
+        ></mat-icon>
+      </button>
+      <button>
+        <mat-icon
+          svgIcon="format_color_text"
+          aria-hidden="false"
+          aria-label="format color text SVG icon"
+        ></mat-icon>
+      </button>
+      <button>
+        <mat-icon
+          svgIcon="format_paint"
+          aria-hidden="false"
+          aria-label="format paint SVG icon"
+        ></mat-icon>
+      </button>
+      <button>
+        <mat-icon
+          svgIcon="format_color_fill"
+          aria-hidden="false"
+          aria-label="format color fill SVG icon"
+        ></mat-icon>
+      </button>
+    </div>
+  </nav>
 
-  <h1>{{ activeTree.value }}</h1>
+  <aside>
+    <h1>{{ activeTree.value }}</h1>
 
-  <input
-    (ngModelChange)="handleChange($event)"
-    [ngModel]="activeTree.content"
-  />
+    <input
+      (ngModelChange)="handleChange($event)"
+      [ngModel]="activeTree.content"
+    />
+  </aside>
 </main>

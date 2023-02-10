@@ -1,5 +1,5 @@
 .flexy {
-  height: 100%;
+  height: 97vh;
   display: grid;
   grid-template-columns: 1fr 2fr;
   grid-template-rows: auto;
@@ -11,8 +11,13 @@
   // flex-flow: row wrap;
 }
 
+.flexy-item:nth-child(1) {
+  background-color: #eef7eb;
+  border-right: 2px solid #537e49;
+}
+
 .flexy-item:nth-child(2) {
-  background-color: orange;
+  background-color: #fdfcff;
 }
 
 // .flexy > * {

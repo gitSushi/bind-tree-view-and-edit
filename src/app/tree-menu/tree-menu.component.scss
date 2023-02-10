@@ -1,23 +1,30 @@
-svg {
-  display: block;
-  min-width: 200px;
-  width: 100%;
-  height: 97vh;
+.relative-container {
+  position: relative;
 
   .griddy {
-    height: 100%;
+    // height: 97vh;
     display: grid;
     place-content: center;
+    position: relative;
+    z-index: 10;
+    min-width: 200px;
   }
 
-  .tree-li {
-    font-weight: 900;
-    cursor: pointer;
-    margin-bottom: 5px;
-  }
+  svg {
+    display: block;
+    padding: 10px;
+    /* width and height minus padding */
+    width: calc(100% - 20px);
+    height: calc(100vh - 20px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    // transform: translate(-50%, -50%);
 
-  .active {
-    background-color: #537e49;
-    color: white;
+    // .tree-li {
+    //   font-weight: 900;
+    //   cursor: pointer;
+    //   margin-bottom: 5px;
+    // }
   }
 }

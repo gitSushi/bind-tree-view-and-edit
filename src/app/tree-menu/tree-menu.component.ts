@@ -7,18 +7,29 @@ import { Tree } from '../tree';
   styleUrls: ['./tree-menu.component.scss'],
 })
 export class TreeMenuComponent implements OnInit {
-  @Input() trees: Tree[] = [];
+  @Input() tree: Tree = {
+    value: '',
+    id: -1,
+    content: '',
+  };
 
   @Input() activeTreeId: number = -1;
 
   @Output() updateActiveTreeId = new EventEmitter<number>();
+  @Output() updateActiveLeafId = new EventEmitter<number>();
 
   constructor() {}
 
   ngOnInit(): void {}
 
   handleClick(id: number) {
+    console.log('handleClick', id);
+
     this.activeTreeId = id;
     this.updateActiveTreeId.emit(id);
+  }
+
+  handleUpdateActiveLeafId(id: number) {
+    this.updateActiveLeafId.emit(id);
   }
 }

@@ -1,14 +1,15 @@
-<p style="text-align: center">
+<!-- <p style="text-align: center">
   FROM APP :
   <span>{{ newContent }}</span>
-</p>
+</p> -->
 
 <div class="flexy">
   <div class="flexy-item">
     <app-tree-menu
-      [trees]="trees"
+      [tree]="tree"
       [activeTreeId]="activeTreeId"
       (updateActiveTreeId)="handleUpdateActiveTreeId($event)"
+      (updateActiveLeafId)="handleUpdateActiveLeafId($event)"
     ></app-tree-menu>
   </div>
   <div class="flexy-item">

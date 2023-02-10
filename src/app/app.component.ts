@@ -11,7 +11,7 @@ import { TreeService } from './tree.service';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'bind-tree-view-and-edit';
 
-  trees: Tree[];
+  tree: Tree;
   activeTree: Tree;
   newContent: string;
 
@@ -24,10 +24,12 @@ export class AppComponent implements OnInit, OnDestroy {
   subscription: Subscription | undefined;
 
   constructor(private service: TreeService) {
-    this.trees = this.service.showTree();
+    this.tree = this.service.showTree();
     this.activeTreeId = this.service.showId();
-    this.activeTree = this.trees[this.activeTreeId];
-    this.newContent = this.trees[this.activeTreeId].content;
+    // this.activeTree = this.trees[this.activeTreeId];
+    // this.newContent = this.trees[this.activeTreeId].content;
+    this.activeTree = this.tree;
+    this.newContent = this.tree.content;
   }
 
   ngOnInit(): void {
@@ -41,18 +43,36 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   doSomething() {
-    console.log('doSomething', this.trees);
+    console.log('doSomething', this.tree);
     console.log('this.activeTreeId', this.activeTreeId);
     this.updateNewContent(this.activeTreeId);
   }
 
   handleUpdateActiveTreeId(id: number) {
     this.activeTreeId = id;
-    this.activeTree = this.trees[this.activeTreeId];
-    this.updateNewContent(id);
+    console.log('handleUpdateActive TREE Id : Need to add activeTree', id);
+    // this.activeTree = this.trees[this.activeTreeId];
+    this.assignActiveTree(id);
+  }
+
+  handleUpdateActiveLeafId(id: number) {
+    this.activeTreeId = id;
+    console.log('handleUpdateActive LEAF Id : Need to add activeTree', id);
+    // this.activeTree = this.trees[this.activeTreeId];
+    this.assignActiveTree(id);
+  }
+
+  assignActiveTree(id: number) {
+    let leaf: Tree | null = null;
+    if ((leaf = this.service.findLeafById(id))) {
+      this.activeTree = leaf;
+      this.updateNewContent(id);
+    }
   }
 
   updateNewContent(id: number) {
-    this.newContent = this.trees[id].content;
+    console.log('updateNewContent : Need to add id', id);
+    // this.newContent = this.trees[id].content;
+    this.newContent = this.tree.content;
   }
 }

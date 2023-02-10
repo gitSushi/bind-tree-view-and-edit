@@ -1,0 +1,11 @@
+<code
+  class=""
+  [class.active-leaf]="activeTreeId === leaf.id"
+  (click)="handleClick(leaf.id)"
+  >{{ leaf.value }}-{{ leaf.id }}</code
+>
+<ul *ngIf="leaf.hasOwnProperty('children')">
+  <li *ngFor="let child of leaf.children">
+    <app-tree-leaf [leaf]="child"></app-tree-leaf>
+  </li>
+</ul>
