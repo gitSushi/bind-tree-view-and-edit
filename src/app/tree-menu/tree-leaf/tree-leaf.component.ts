@@ -1,28 +1,40 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Tree } from 'src/app/tree';
+import { TreeService } from 'src/app/tree.service';
 
 @Component({
   selector: 'app-tree-leaf',
   templateUrl: './tree-leaf.component.html',
   styleUrls: ['./tree-leaf.component.scss'],
 })
-export class TreeLeafComponent implements OnInit {
+export class TreeLeafComponent implements OnInit, OnDestroy {
   @Input() leaf: Tree = {
-    value: '',
     id: -1,
-    content: '',
   };
 
-  @Input() activeTreeId: number = -1;
+  activeTreeId: number = -1;
+  subscriptionToId: Subscription | undefined;
 
-  @Output() updateActiveLeafId = new EventEmitter<number>();
+  constructor(private treeService: TreeService) {
+    this.activeTreeId = this.treeService.showId();
+  }
 
-  constructor() {}
+  ngOnInit(): void {
+    this.subscriptionToId = this.treeService.currentActiveTreeId.subscribe(
+      (id) => {
+        if (id != this.activeTreeId) {
+          this.activeTreeId = id;
+        }
+      }
+    );
+  }
 
-  ngOnInit(): void {}
+  ngOnDestroy(): void {
+    this.subscriptionToId && this.subscriptionToId.unsubscribe();
+  }
 
   handleClick(id: number) {
-    console.log('leaf', id);
-    this.updateActiveLeafId.emit(id);
+    this.treeService.changeActiveTreeId(id);
   }
 }

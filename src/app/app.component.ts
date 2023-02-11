@@ -1,5 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { Tree } from './tree';
 import { TreeService } from './tree.service';
 
@@ -8,71 +7,44 @@ import { TreeService } from './tree.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, OnDestroy {
-  title = 'bind-tree-view-and-edit';
+export class AppComponent {
+  @ViewChild('flexyItemSidebar') flexyItemSidebar: ElementRef =
+    {} as ElementRef;
+  @ViewChild('sidebarTreeMenuContainer') sidebarTreeMenuContainer: ElementRef =
+    {} as ElementRef;
+  isHidden: boolean = false;
 
   tree: Tree;
-  activeTree: Tree;
-  newContent: string;
 
-  /**
-   * @type {number} activeTreeId - Represents the history cookie : last visited node
-   */
-  activeTreeId: number;
-
-  // message:string;
-  subscription: Subscription | undefined;
-
-  constructor(private service: TreeService) {
+  constructor(private service: TreeService, private renderer: Renderer2) {
     this.tree = this.service.showTree();
-    this.activeTreeId = this.service.showId();
-    // this.activeTree = this.trees[this.activeTreeId];
-    // this.newContent = this.trees[this.activeTreeId].content;
-    this.activeTree = this.tree;
-    this.newContent = this.tree.content;
   }
 
-  ngOnInit(): void {
-    this.subscription = this.service.currentMessage.subscribe((message) => {
-      this.doSomething();
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription && this.subscription.unsubscribe();
-  }
-
-  doSomething() {
-    console.log('doSomething', this.tree);
-    console.log('this.activeTreeId', this.activeTreeId);
-    this.updateNewContent(this.activeTreeId);
-  }
-
-  handleUpdateActiveTreeId(id: number) {
-    this.activeTreeId = id;
-    console.log('handleUpdateActive TREE Id : Need to add activeTree', id);
-    // this.activeTree = this.trees[this.activeTreeId];
-    this.assignActiveTree(id);
-  }
-
-  handleUpdateActiveLeafId(id: number) {
-    this.activeTreeId = id;
-    console.log('handleUpdateActive LEAF Id : Need to add activeTree', id);
-    // this.activeTree = this.trees[this.activeTreeId];
-    this.assignActiveTree(id);
-  }
-
-  assignActiveTree(id: number) {
-    let leaf: Tree | null = null;
-    if ((leaf = this.service.findLeafById(id))) {
-      this.activeTree = leaf;
-      this.updateNewContent(id);
+  toogleSidebar(event: MouseEvent) {
+    if (this.isHidden) {
+      this.renderer.setStyle(
+        this.flexyItemSidebar.nativeElement,
+        'width',
+        '300px'
+      );
+      this.renderer.removeClass(
+        this.sidebarTreeMenuContainer.nativeElement,
+        'hide-container'
+      );
+      this.renderer.setProperty(event.target, 'textContent', '◄');
+      this.isHidden = false;
+    } else {
+      this.renderer.setStyle(
+        this.flexyItemSidebar.nativeElement,
+        'width',
+        '20px'
+      );
+      this.renderer.addClass(
+        this.sidebarTreeMenuContainer.nativeElement,
+        'hide-container'
+      );
+      this.renderer.setProperty(event.target, 'textContent', '►');
+      this.isHidden = true;
     }
-  }
-
-  updateNewContent(id: number) {
-    console.log('updateNewContent : Need to add id', id);
-    // this.newContent = this.trees[id].content;
-    this.newContent = this.tree.content;
   }
 }

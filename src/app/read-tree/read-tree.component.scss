@@ -5,61 +5,85 @@ main {
   nav {
     border-bottom: 2px solid #fd9c0a;
 
-    p {
+    h2 {
       margin: 0;
       padding: 12px 0;
-      font-size: 1.5em;
-      font-weight: 900;
       color: white;
       background-color: #fd9c0a;
       text-shadow: 1px 1px #8c01b7;
-      text-indent: 40px;
+      text-indent: 50px;
     }
 
     .flexy-nav {
       display: flex;
-      // justify-content: space-evenly;
+      justify-content: space-between;
       align-items: center;
-      padding: 6px 12px;
 
-      input[class^="input-font-"],
-      button {
-        margin: 0 2px;
-      }
-
-      .input-font-family {
-        width: 100px;
-      }
-
-      .input-font-size {
-        width: 30px;
-      }
-
-      button {
-        // border: 1px solid#fd9c0a;
-        border: none;
-        border-radius: 10px;
-        background-color: #fdf8ff;
+      .flexy-nav-format-buttons {
+        display: flex;
+        align-items: center;
         padding: 6px 12px;
-        font-size: 1em;
-        cursor: pointer;
-        transition: background-color 450ms;
 
-        mat-icon {
-          // fill: #1c3609;
-          fill: #8c01b7;
+        input[class^="input-font-"],
+        button {
+          margin: 0 2px;
+        }
+
+        .input-font-family {
+          width: 100px;
+        }
+
+        .input-font-size {
+          width: 30px;
+        }
+
+        button {
+          border: none;
+          border-radius: 10px;
+          background-color: #fdf8ff;
+          padding: 6px 12px;
+          font-size: 1em;
+          cursor: pointer;
+          transition: background-color 450ms;
+
+          .readonly-color-path {
+            // fill: #1c3609;
+            fill: #8c01b7;
+          }
+        }
+
+        button:hover {
+          background-color: #f8e6ff;
+        }
+
+        .flexy-nav-border {
+          margin-left: 2px;
+          width: 2px;
+          height: 35px;
+          background-color: #8c01b7;
         }
       }
 
-      button:hover {
-        background-color: #f8e6ff;
+      .flexy-nav-preview-button {
+        margin-right: 10px;
+        border: 1px solid #8c01b7;
+        border-radius: 10px;
+        background-color: #fd9c0a;
+        color: #1b3409;
+        font-weight: 600;
+        padding: 6px 12px;
+        cursor: pointer;
+        transition: background-color 450ms, color 450ms, border-color 450ms;
       }
 
-      .flexy-nav-border {
-        margin-left: 2px;
-        width: 2px;
-        height: 35px;
+      .flexy-nav-preview-button:hover {
         background-color: #8c01b7;
+        color: #fff;
+        border-color: #fd9c0a;
+      }
+
+      .flexy-nav-preview-button:active {
+        transform: scale(0.97);
       }
     }
   }
@@ -67,11 +91,14 @@ main {
   aside {
     display: grid;
     place-content: center;
+    height: calc(100% - 111.2px);
+
     h1 {
       text-align: center;
-      font-size: 5em;
+      font-size: 2.5em;
       color: #8c01b7;
       text-shadow: 3px 1px #fd9c0a;
+      margin: 0;
     }
 
     input {

@@ -8,7 +8,6 @@ import { TreeMenuComponent } from './tree-menu/tree-menu.component';
 import { ReadTreeComponent } from './read-tree/read-tree.component';
 import { TreeLeafComponent } from './tree-menu/tree-leaf/tree-leaf.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -22,7 +21,6 @@ import { MatIconModule } from '@angular/material/icon';
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

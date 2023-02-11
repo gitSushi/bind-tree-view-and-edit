@@ -1,19 +1,17 @@
-<!-- <p style="text-align: center">
-  FROM APP :
-  <span>{{ newContent }}</span>
-</p> -->
-
 <div class="flexy">
-  <div class="flexy-item">
-    <app-tree-menu
-      [tree]="tree"
-      [activeTreeId]="activeTreeId"
-      (updateActiveTreeId)="handleUpdateActiveTreeId($event)"
-      (updateActiveLeafId)="handleUpdateActiveLeafId($event)"
-    ></app-tree-menu>
+  <div #flexyItemSidebar class="flexy-item">
+    <div class="sidebar">
+      <div class="sidebar-tree-menu-container">
+        <div #sidebarTreeMenuContainer>
+          <app-tree-menu [tree]="tree"></app-tree-menu>
+        </div>
+      </div>
+      <div class="sidebar-btn-container">
+        <button class="sidebar-btn" (click)="toogleSidebar($event)">◄</button>
+      </div>
+    </div>
   </div>
   <div class="flexy-item">
-    <app-read-tree [activeTree]="activeTree"></app-read-tree>
+    <app-read-tree></app-read-tree>
   </div>
-  <!-- <div class="flexy-item"><router-outlet></router-outlet></div> -->
 </div>

@@ -1,6 +1,5 @@
 <div class="relative-container">
   <div class="griddy">
-    <div class="hello">Hello Tree !</div>
     <ul class="tree tree-ng">
       <li>
         <code
@@ -11,11 +10,7 @@
         >
         <ul>
           <li *ngFor="let leaf of tree.children">
-            <app-tree-leaf
-              [leaf]="leaf"
-              [activeTreeId]="activeTreeId"
-              (updateActiveLeafId)="handleUpdateActiveLeafId($event)"
-            ></app-tree-leaf>
+            <app-tree-leaf [leaf]="leaf"></app-tree-leaf>
           </li>
         </ul>
       </li>
@@ -39,38 +34,3 @@
     </g>
   </svg>
 </div>
-<!--
-  <foreignObject
-    x="15"
-    y="16"
-    width="122"
-    height="151"
-    preserveAspectRatio="xMidYMid meet"
-  >
-    <div xmlns="http://www.w3.org/1999/xhtml" class="griddy">
-      <div class="hello">Hello Tree !</div>
-      <ul class="">
-        
-
-        <li
-          class="tree-li"
-          (click)="handleClick(tree.id)"
-          *ngFor="let tree of trees"
-          [class.active]="activeTreeId === tree.id"
-        >
-          {{ tree.value }}-{{ tree.id }}
-        </li>
-      </ul>
-    </div>
-  </foreignObject>
--->
-<!-- <li>
-          <a
-            routerLink="/root-node"
-            routerLinkActive="active"
-            ariaCurrentWhenActive="page"
-            >A</a
-          >
-        </li> -->
-<!-- <li><a>B</a></li>
-        <li><a>C</a></li> -->

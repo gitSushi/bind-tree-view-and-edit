@@ -1,19 +1,9 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Tree } from '../tree';
 import { TreeService } from '../tree.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MatIconRegistry } from '@angular/material/icon';
 
-import {
-  FORMAT_BOLD_ICON,
-  FORMAT_ITALIC,
-  FORMAT_UNDERLINED,
-  FORMAT_INK_HIGHLIGHTER_ICON,
-  FORMAT_COLOR_TEXT_ICON,
-  FORMAT_PAINT_ICON,
-  FORMAT_COLOR_FILL_ICON,
-} from './svg-icon';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-read-tree',
@@ -21,61 +11,86 @@ import {
   styleUrls: ['./read-tree.component.scss'],
 })
 export class ReadTreeComponent implements OnInit, OnDestroy {
-  @Input() activeTree: Tree = {
-    value: '',
+  activeTree: Tree = {
     id: -1,
-    content: '',
   };
 
-  subscription: Subscription | undefined;
+  activeTreeSubscription: Subscription | undefined;
 
-  constructor(
-    private service: TreeService,
-    iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer
-  ) {
-    iconRegistry.addSvgIconLiteral(
-      'format_bold',
-      sanitizer.bypassSecurityTrustHtml(FORMAT_BOLD_ICON)
-    );
-    iconRegistry.addSvgIconLiteral(
-      'format_italic',
-      sanitizer.bypassSecurityTrustHtml(FORMAT_ITALIC)
-    );
-    iconRegistry.addSvgIconLiteral(
-      'format_underlined',
-      sanitizer.bypassSecurityTrustHtml(FORMAT_UNDERLINED)
-    );
-    iconRegistry.addSvgIconLiteral(
-      'format_ink_highlighter',
-      sanitizer.bypassSecurityTrustHtml(FORMAT_INK_HIGHLIGHTER_ICON)
-    );
-    iconRegistry.addSvgIconLiteral(
-      'format_color_text',
-      sanitizer.bypassSecurityTrustHtml(FORMAT_COLOR_TEXT_ICON)
-    );
-    iconRegistry.addSvgIconLiteral(
-      'format_paint',
-      sanitizer.bypassSecurityTrustHtml(FORMAT_PAINT_ICON)
-    );
-    iconRegistry.addSvgIconLiteral(
-      'format_color_fill',
-      sanitizer.bypassSecurityTrustHtml(FORMAT_COLOR_FILL_ICON)
-    );
-  }
+  readonly YELLOW: string = '#FFFF00';
+  readonly LIME: string = 'lime';
+  readonly BLACK: string = '#000000';
+  readonly TRENDING_BLUE = '#82c1ff';
+  readonly TRENDING_RED = '#ff676b';
+
+  highlightedColor: string = this.YELLOW;
+  colorFillColor: string = this.BLACK;
+  colorTextColor: string = this.TRENDING_BLUE;
+
+  constructor(private treeService: TreeService) {}
 
   ngOnInit(): void {
-    this.subscription = this.service.currentMessage.subscribe(
-      (message) => message
+    this.activeTreeSubscription = this.treeService.currentActiveTree.subscribe(
+      (tree) => {
+        if (tree != this.activeTree) {
+          this.activeTree = tree;
+        }
+      }
     );
   }
 
   ngOnDestroy(): void {
-    this.subscription && this.subscription.unsubscribe();
+    this.activeTreeSubscription && this.activeTreeSubscription.unsubscribe();
   }
 
   handleChange(value: string) {
     this.activeTree.content = value;
-    this.service.changeContent(this.activeTree);
+    this.treeService.changeContent(this.activeTree);
+  }
+
+  handlePreview() {
+    console.log('NO PREVIEW YET ! ... snif');
+  }
+
+  handleBold() {
+    console.log('How bold of you !');
+  }
+
+  handleItalic() {
+    console.log(
+      'I might be comming down with something, I feel a bit skewed ...'
+    );
+  }
+
+  handleUnderlined() {
+    console.log("What's that under my feet ? a line ?!?");
+  }
+
+  handleHighlighter() {
+    if (this.highlightedColor === this.YELLOW) {
+      this.highlightedColor = 'orangeRed';
+    } else {
+      this.highlightedColor = this.YELLOW;
+    }
+  }
+
+  handleColorText() {
+    if (this.colorTextColor === this.TRENDING_BLUE) {
+      this.colorTextColor = this.TRENDING_RED;
+    } else {
+      this.colorTextColor = this.TRENDING_BLUE;
+    }
+  }
+
+  handlePaint() {
+    console.log('Paint me happy !');
+  }
+
+  handleFillColor() {
+    if (this.colorFillColor === this.LIME) {
+      this.colorFillColor = this.BLACK;
+    } else {
+      this.colorFillColor = this.LIME;
+    }
   }
 }

@@ -7,7 +7,7 @@
     place-content: center;
     position: relative;
     z-index: 10;
-    min-width: 200px;
+    min-width: 272px;
   }
 
   svg {
@@ -19,12 +19,5 @@
     position: absolute;
     top: 0;
     left: 0;
-    // transform: translate(-50%, -50%);
-
-    // .tree-li {
-    //   font-weight: 900;
-    //   cursor: pointer;
-    //   margin-bottom: 5px;
-    // }
   }
 }

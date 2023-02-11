@@ -15,6 +15,12 @@ export class TreeService {
         value: 'B',
         id: 1,
         content: 'B Like [ˈbiː] yourself',
+        children: [
+          {
+            value: 'D',
+            id: 3,
+          },
+        ],
       },
       {
         value: 'C',
@@ -25,20 +31,36 @@ export class TreeService {
   };
 
   activeTreeId: number = 0;
+  activeTree: Tree = this.tree;
 
   private messageSource = new BehaviorSubject(this.tree);
   currentMessage = this.messageSource.asObservable();
+
+  private activeTreeIdSubject = new BehaviorSubject(this.activeTreeId);
+  currentActiveTreeId = this.activeTreeIdSubject.asObservable();
+
+  private activeTreeSubject = new BehaviorSubject(this.activeTree);
+  currentActiveTree = this.activeTreeSubject.asObservable();
 
   constructor() {}
 
   changeContent(message: Tree) {
     this.messageSource.next(message);
-    //  TRAVERSE TREE
+  }
 
-    // this.trees = this.trees.map((e) => {
-    //   if (e.id === message.id) return message;
-    //   return e;
-    // });
+  changeActiveTreeId(id: number) {
+    this.activeTreeIdSubject.next(id);
+    this.changeActiveTreeById(id);
+  }
+
+  changeActiveTreeById(id: number) {
+    let leaf: Tree | null = null;
+    if ((leaf = this.findLeafById(id))) {
+      this.activeTree = leaf;
+      this.activeTreeSubject.next(leaf);
+    } else {
+      console.error('Leaf was not found');
+    }
   }
 
   showTree(): Tree {
